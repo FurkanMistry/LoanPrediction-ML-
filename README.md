@@ -6,7 +6,7 @@ This project aims to predict the likelihood of customers defaulting on loans bas
 
 ## Dataset
 
-The dataset used for this project can be found [here](https://link-to-dataset.com). It contains information about customers' financial and demographic attributes, including the following features:
+The dataset used for this project can be found [here](https://www.kaggle.com/datasets/subhamjain/loan-prediction-based-on-customer-behavior). It contains information about customers' financial and demographic attributes, including the following features:
 - Income
 - Age
 - Profession
