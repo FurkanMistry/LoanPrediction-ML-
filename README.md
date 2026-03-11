@@ -42,3 +42,19 @@ The dataset used for this project can be found [here](https://www.kaggle.com/dat
 ## Colab Notebook
 
 Access the Colab notebook for this project [here](https://colab.research.google.com/drive/1uCEu6eL5rohkxPqqWJAjg7ZS4YQ-U5eJ#printMode=true).
+
+## Security Review
+
+A quick review of the repository did **not** find any hardcoded secrets, unsafe deserialization, or shell execution in the notebook. The main security weaknesses currently are:
+
+1. **Broad Google Drive access in Colab**  
+   The notebook mounts the entire Google Drive with `drive.mount('/content/drive')`, which grants the runtime access to more files than are needed for training. Prefer uploading only the required dataset files or reading from a narrowly scoped working directory.
+
+2. **Hardcoded data paths**  
+   The notebook reads data from fixed paths under `/content/drive/MyDrive/ML/...`. This makes it harder to audit data provenance and can encourage placing sensitive datasets in personal storage without clear access controls. Prefer configurable paths and avoid storing sensitive data in broadly accessible folders.
+
+3. **No pinned dependency manifest**  
+   The project does not include a `requirements.txt` or similar lock file, so dependency versions cannot be audited or reproduced reliably. Add a pinned dependency file before sharing or deploying the workflow so dependency vulnerabilities can be checked consistently.
+
+4. **No automated security or test workflow**  
+   The repository has no automated lint, test, or security scanning configuration. Adding basic CI checks would make it easier to catch vulnerable dependency updates and notebook regressions early.
